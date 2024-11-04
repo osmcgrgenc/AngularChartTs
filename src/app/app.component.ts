@@ -8,4 +8,8 @@ import {exampleCharts} from './mock/chartData';
 export class AppComponent {
   title = 'chart-project';
   chartOptions = exampleCharts;
+
+  dataConverter = (liste: any[], x_kolon: string, y_kolon: string) : [number, any][] => {
+    return liste.map((eleman)=>{return [eleman[x_kolon],eleman[y_kolon]]});
+  }
 }
