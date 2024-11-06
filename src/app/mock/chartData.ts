@@ -1,6 +1,7 @@
 type ChartOptions = {
   lines?: { data: [number, number][], color?: string }[];
   bars?: { data: [number, number][], color?: string, opacity?: number, radius?: number }[];
+  dots?: { data: [number, number][], color?: string, radius?: number }[];
   xAxis: { title: string; min: number; max: number; ticks?: number | string; timeSeries?: boolean };
   yAxis: { title: string; min: number; max: number; ticks?: number };
   barSep?: number;
@@ -40,9 +41,13 @@ export const exampleCharts: ChartOptions[] = [
   },
   {
     xAxis: { title: 'Months', min: 0, max: 12, ticks: 1 },
-    yAxis: { title: 'Sales', min: -750, max: 750, ticks: 50 },
-    bars: [
-      { data: Array.from({length: 12}, (_, i) => [i%12, i*50 * (i%2?1:-1)]), color: 'steelblue', opacity: 0.5, radius: 1 }
+    yAxis: { title: 'Sales', min: -750, max: 750, ticks: 250 },
+    dots: [
+      { data: Array.from({length: 12}, (_, i) => [i%12, i*10 * (i%2?1:-1)]), color: 'steelblue', radius: 5 },
+      { data: Array.from({length: 12}, (_, i) => [i%12, i*20 * (i%2?1:-1)]), color: 'red', radius: 4 },
+      { data: Array.from({length: 12}, (_, i) => [i%12, i*30 * (i%2?1:-1)]), color: 'black', radius: 3 },
+      { data: Array.from({length: 12}, (_, i) => [i%12, i*40 * (i%2?1:-1)]), color: 'green', radius: 2 },
+      { data: Array.from({length: 12}, (_, i) => [i%12, i*50 * (i%2?1:-1)]), color: 'orange', radius: 1 },
     ]
   }
 ];

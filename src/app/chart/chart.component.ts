@@ -257,14 +257,29 @@ export class ChartComponent implements AfterViewInit {
       ctx.restore();
     };
 
+    let plotDot = (data: any[], color: string, radius: number) => {
+      if (data.length === 0) return;
+      ctx.save();
+      ctx.fillStyle = color;
+      data.forEach((el) => {
+        ctx.beginPath();
+        ctx.arc((el[0] - this.options.xAxis.min) * xx, -(el[1] - this.options.yAxis.min) * yx, radius*5, 0, 2 * Math.PI);
+        ctx.fill();
+      });
+      ctx.restore();
+    };
+
     setup();
     axes();
     ticks();
-    this.options.bars.forEach((d: any, idx: number) =>
+    this.options.bars?.forEach((d: any, idx: number) =>
       plotBar(d.data, d.color || colors[idx % colors.length], this.options.bars.length, idx, this.options.barSep, d.radius || 0, d.opacity || 1)
     );
-    this.options.lines.forEach((d: any, idx: number) =>
+    this.options.lines?.forEach((d: any, idx: number) =>
       plotLine(d.data, d.color || colors[idx % colors.length])
+    );
+    this.options.dots?.forEach((d: any, idx: number) =>
+      plotDot(d.data, d.color || colors[idx % colors.length], d.radius || 5)
     );
   }
 }
